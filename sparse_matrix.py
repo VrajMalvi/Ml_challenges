@@ -10,15 +10,15 @@ def sparse_matrix_multiplication(matrix_a, matrix_b):
     if len(matrix_a[0]) != len(matrix_b):
         return [[]]
 
-    sparse_a = get_dict_of_nonzero_cells(matrix_a)
-    sparse_b = get_dict_of_nonzero_cells(matrix_b)
+    sparse_a = get_dict_of_nonzero_cells(matrix_a)    # we will get dictonary of index (i,j) : value(if its nonzero)
+    sparse_b = get_dict_of_nonzero_cells(matrix_b)      
 
-    matrix_c = [[0] * len(matrix_b[0]) for _ in range(len(matrix_a))]
+    matrix_c = [[0] * len(matrix_b[0]) for _ in range(len(matrix_a))]  # c will all zero row of a & col of b
 
     for i,k in sparse_a.keys():
         for j in range(len(matrix_b[0])):
             if (k,j) in sparse_b.keys():
-                matrix_c[i][j] += sparse_a[(i,k)] * sparse_b[(k,j)]
+                matrix_c[i][j] += sparse_a[(i,k)] * sparse_b[(k,j)] # += because for many non-zero value might me there which sum up to same i,j for c
     return matrix_c
     
 def get_dict_of_nonzero_cells(matrix):
